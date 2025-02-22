@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Quiz 2: Ticketing Center | SEVENTEEN RIGHT HERE World Tour</title>
+
+	<!-- SETUP BOOTSTAP: link to Bootstrap -->
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+
+	<!-- link to JS -->
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+
+	<!-- Add style -->
+	<link rel="stylesheet" type="text/css" href="style.css">
+
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400..700&family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=Roboto+Condensed:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">	
+
+</head>
+<body>
+	<div class="container">
+		<div>
+			<h1 class="mt-3 mb-3">TICKETING CENTER</h1>
+		</div>
+		<hr>
+		<div class="row">
+			<div class="col">
+				<details ontoggle="morePI()">
+					<summary>
+						<h5>Personal Information</h5>
+						<p id="idPI"></p>
+					</summary>
+					<hr>
+					<form>
+						<label for="names">Last Name, First Name:</label>
+						<input type="text" id="names" class="form-control">
+						<br>
+						<label for="email">Email:</label>
+						<input type="email" id="email" class="form-control">
+						<br>
+					</form>
+					<button type="button" class="btn btn-dark" id="sbmt" onclick="SubPI()" onmouseover="changeSbmtColor()" onmouseout="resetSbmtColor()">SUBMIT</button> <!--Button outside of form element to not get affected by form style-->
+				</details>
+			</div>
+			<div class="col">
+				<details ontoggle="moreTP()">
+					<summary>
+						<h5>Ticket Price</h5>
+						<p id="idTP"></p>
+					</summary>
+					<hr>
+					<form>
+						<label for="seat">Select a location:</label>
+						<select id="seat" class="form-control">
+							<option value="20000">VIP STANDING</option>
+							<option value="15000">STANDING</option>
+							<option value="10000">BLEACHERS</option>
+						</select>
+						<br>
+						<label for="group">Select A Group:</label>
+						<select id="group" class="form-control">
+							<option value="0.75">STUDENT</option>
+							<option value="1">REGULAR</option>
+							<option value="0.5">SENIOR</option>
+						</select>
+						<br>
+					</form>
+					<button type="button" id="prce" class="btn btn-dark" onclick="tprice()" onmouseover="changePrceColor()" onmouseout="resetPrceColor()">TICKET PRICE</button>
+				</details>
+			</div>
+			<div class="col">
+				<details ontoggle="morePT()">
+					<summary>
+						<h5>Print Ticket</h5>
+						<p id="idPT"></p>
+					</summary>
+					<hr>
+					<img src="printer.png">
+					<br><br>
+					<button type="button" class="btn btn-dark" id="prnt" onclick="printing()" onmouseover="changePrntColor()" onmouseout="resetPrntColor()">PRINT TICKET</button>
+					<button type="button" class="btn btn-dark" id="again" onclick="window.location.reload()" onmouseover="changeAgainColor()" onmouseout="resetAgainColor()">BUY ANOTHER</button>
+				</details>
+			</div>
+		</div>
+		<hr>
+		<a href="about.html">
+			<div class="footer">
+				<p>&copy; SY 2024-2025 | Cabatingan, Jade Louisse | 9-Ruby | ICT Quiz 2</p>
+			</div>
+		</a>
+		<script>
+			function morePI() {
+				document.getElementById('idPI').innerHTML = 'Please fill out the form below.';
+			}
+
+			function moreTP() {
+				document.getElementById('idTP').innerHTML = 'Please select options for ticket price.';
+			}
+
+			function morePT() {
+				window.alert("Please make sure you have answered the previous forms before printing your ticket.");
+				document.getElementById('idPT').innerHTML = 'Please press the button for more details.';
+			}
+
+			function SubPI() {
+				window.alert("Your personal information has been recorded.");
+			}
+
+			document.getElementById('names').onchange = function() {namechange()};
+
+			function namechange() {
+				var fname = document.getElementById('names');
+				fname.value = fname.value.toUpperCase();
+			}
+
+			function tprice() {
+				var price = document.getElementById('seat').value;
+				var disc = document.getElementById('group').value;
+				var fprice = price*disc; //to get discounted price (student is 25% off, senior is 50% off)
+				window.alert("The total price of your ticket is " + fprice +".");
+			}
+
+			function printing() {
+				window.alert("Please check your email for your ticket. Thank you!");
+			}
+
+			const sbmt = document.getElementById('sbmt');
+			const prce = document.getElementById('prce');
+			const prnt = document.getElementById('prnt');
+			const again = document.getElementById('again');
+
+			//following functions connected to const above
+			
+			function changeSbmtColor() { 
+				sbmt.style.color = "black";
+				sbmt.style.background = "brown";
+			}
+
+			function changePrceColor() {
+
+				prce.style.color = "black";
+				prce.style.background = "brown";
+			}
+
+			function changePrntColor() {
+				prnt.style.color = "black";
+				prnt.style.background = "brown";
+			}
+
+			function changeAgainColor() {
+				again.style.color = "black";
+				again.style.background = "brown";
+			}
+
+			function resetSbmtColor() {
+				sbmt.style.color = "white";
+				sbmt.style.background = "black";
+			}
+
+			function resetPrceColor() {
+				prce.style.color = "white";
+				prce.style.background = "black";
+			}
+
+			function resetPrntColor() {
+				prnt.style.color = "white";
+				prnt.style.background = "black";	
+			}
+
+			function resetAgainColor() {
+				again.style.color = "white";
+				again.style.background = "black";	
+			}
+
+		</script>
+	</div>
+
+</body>
+</html>
